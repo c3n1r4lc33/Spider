@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/styles.css">
+  <title>Авторизация - Человек-паук</title>
+  <style>
+    main {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      box-shadow: none;
+    }
+
+    label {
+      margin-bottom: 10px;
+    }
+
+    .form {
+      padding: 20px;
+      max-width: 600px;
+      width: 100%;
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+    }
+
+    .error {
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Человек-паук</h1>
+  </header>
+  <main>
+    <div class="form">
+      <h2>Форма авторизации</h2>
+
+      <form id="authForm">
+        <div class="form__group">
+          <label for="username">Логин (4-10 символов, русские буквы и цифры):</label>
+          <input 
+          type="text" 
+          id="username" 
+          name="username" 
+          pattern="^(?=.*[А-Яа-яЁё])(?=.*\d)[А-Яа-яЁё0-9]{4,10}$" 
+          required 
+          title="Логин должен содержать от 4 до 10 символов русского алфавита и цифр, включая хотя бы одну букву и одну цифру">
+      
+      
+          <span id="usernameError" class="error"></span>
+        </div>
+
+        <div class="form__group">
+          <label for="dob">Дата рождения:</label>
+          <input 
+              type="date" 
+              id="dob" 
+              name="dob" 
+              min="1950-01-01" 
+              max="" 
+              required 
+              title="Дата должна быть не раньше 1950 года и не позже текущей">
+          <span id="dobError" class="error"></span>
+        </div>
+
+        <div class="form__group">
+          <label for="gender">Пол:</label>
+          <select id="gender" name="gender" required>
+            <option value="" disabled selected>Выберите пол</option>
+            <option value="Мужской">Мужской</option>
+            <option value="Женский">Женский</option>
+          </select>
+        </div>
+
+        <button type="submit">Войти</button>
+      </form>
+    </div>
+  </main>
+  <footer>
+    <p>Контактные данные: <a href="#">Телефон</a> <a href="#">ВК</a> <a href="#">Телеграм</a></p>
+    <p>&copy; 2024</p>
+  </footer>
+  <script>
+    // Устанавливаем максимальную дату рождения как текущую
+    document.getElementById('dob').max = new Date().toISOString().split('T')[0];
+
+    // Обработка формы авторизации
+    document.getElementById('authForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Останавливаем стандартное поведение формы
+
+      const username = document.getElementById('username').value;
+      const gender = document.getElementById('gender').value;
+
+      // Сохраняем логин в localStorage
+      localStorage.setItem('username', username);
+      localStorage.setItem('gender', gender);
+
+      // Перенаправляем на страницу описания
+      window.location.href = 'description.html';
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/styles.css">
+  <title>Тест - Человек-паук</title>
+  <style>
+    /* Стили для теста */
+    .question {
+      margin-bottom: 20px;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    .correct {
+      color: green;
+    }
+
+    .incorrect {
+      color: red;
+    }
+
+    .retry-button {
+      margin-top: 20px;
+      padding: 10px 15px;
+      background-color: #c0392b;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .retry-button:hover {
+      background-color: #a93226;
+    }
+
+    .feedback {
+      margin-top: 5px;
+      font-size: 0.9em;
+    }
+
+    .button-wrap {
+      display: flex;
+      gap: 8px;
+    }
+
+    .button-reload {
+      background: green;
+    }
+
+    .button-reload:hover {
+      background: darkgreen;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Человек-паук</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Описание</a></li>
+        <li><a href="glossary.html">Словарь</a></li>
+        <li><a href="gallery.html">Галерея</a></li>
+        <li><a href="quiz.html" class="active">Тест</a></li>
+        <li><a href="profile.html">Личный кабинет</a></li>
+        <li><span id="userGreeting">Добро пожаловать, [Имя пользователя]</span> <button id="logoutButton"
+            onclick="logout()">Выйти</button></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <h2>Тест о Человеке-Пауке</h2>
+    <form id="quizForm">
+      <div class="question">
+        <p>1. Как зовут истинную личность Человека-Паука?</p>
+        <input type="text" name="q1" placeholder="Введите ответ">
+        <div class="feedback" id="feedback-q1"></div>
+      </div>
+      <div class="question">
+        <p>2. Кто является главным врагом Человека-Паука, обладающим симбиотом?</p>
+        <label><input type="radio" name="q2" value="Веном"> Веном</label><br>
+        <label><input type="radio" name="q2" value="Зеленый Гоблин"> Зеленый Гоблин</label><br>
+        <label><input type="radio" name="q2" value="Доктор Октавиус"> Доктор Октавиус</label><br>
+        <div class="feedback" id="feedback-q2"></div>
+      </div>
+      <div class="question">
+        <p>3. Какой супергерой является другом Человека-Паука и также членом Мстителей?</p>
+        <label><input type="radio" name="q3" value="Капитан Америка"> Капитан Америка</label><br>
+        <label><input type="radio" name="q3" value="Железный Человек"> Железный Человек</label><br>
+        <label><input type="radio" name="q3" value="Тор"> Тор</label><br>
+        <div class="feedback" id="feedback-q3"></div>
+      </div>
+      <div class="question">
+        <p>4. Какой город является домом Человека-Паука?</p>
+        <input type="text" name="q4" placeholder="Введите ответ">
+        <div class="feedback" id="feedback-q4"></div>
+      </div>
+      <div class="question">
+        <p>5. Какой из этих персонажей является тетей Человека-Паука?</p>
+        <label><input type="radio" name="q5" value="Мэй Паркер"> Мэй Паркер</label><br>
+        <label><input type="radio" name="q5" value="Мэри Джейн"> Мэри Джейн</label><br>
+        <label><input type="radio" name="q5" value="Гвен Стейси"> Гвен Стейси</label><br>
+        <div class="feedback" id="feedback-q5"></div>
+      </div>
+      <div class="question">
+        <p>6. Какой суперзлодей является врагом Человека-Паука и имеет механические щупальца?</p>
+        <input type="text" name="q6" placeholder="Введите ответ">
+        <div class="feedback" id="feedback-q6"></div>
+      </div>
+      <div class="button-wrap">
+        <button type="button" onclick="checkAnswers()">Проверить ответы</button>
+
+        <button type="button" onclick="resetQuiz()" style="display:none;" id="resetButton" class="button-reload">Пройти тест заново</button>
+
+      </div>
+    </form>
+    <div class="result" id="result"></div>
+  </main>
+  <footer>
+     <p>Контактные данные: <a href="#">Телефон</a> <a href="#">ВК</a> <a href="#">Телеграм</a></p>
+    <p>Человек-паук © 2024</p>
+  </footer>
+  <script src="js/script.js"></script>
+  <script>
+    // Функция для проверки ответов теста
+    function checkAnswers() {
+      const answers = {
+        q1: 'Питер Паркер',
+        q2: 'Веном',
+        q3: 'Железный Человек',
+        q4: 'Нью-Йорк',
+        q5: 'Мэй Паркер',
+        q6: 'Доктор Октавиус'
+      };
+
+      let score = 0;
+      const form = document.getElementById('quizForm');
+      const resultDiv = document.getElementById('result');
+      resultDiv.innerHTML = ''; // Очистка предыдущих результатов
+
+      for (let question in answers) {
+        const userAnswer = form[question].value.trim();
+        const feedbackDiv = document.getElementById(`feedback-${question}`);
+        feedbackDiv.innerHTML = ''; // Очистка предыдущих отзывов
+
+        if (userAnswer === answers[question]) {
+          score++;
+          feedbackDiv.innerHTML = 'Ответ верный!';
+          feedbackDiv.className = 'feedback correct';
+        } else {
+          feedbackDiv.innerHTML = `Ответ неправильный, правильный ответ: ${answers[question]}`;
+          feedbackDiv.className = 'feedback incorrect';
+        }
+      }
+
+      resultDiv.innerHTML = `Вы ответили правильно на ${score} из ${Object.keys(answers).length} вопросов.`;
+      localStorage.setItem('score', score);
+      document.getElementById('resetButton').style.display = 'block'; // Показать кнопку перезапуска
+    }
+
+    // Функция для сброса теста
+    function resetQuiz() {
+      const form = document.getElementById('quizForm');
+      form.reset(); // Сбросить форму
+      const feedbackDivs = document.querySelectorAll('.feedback');
+      feedbackDivs.forEach(div => {
+        div.innerHTML = ''; // Очистка отзывов
+        div.className = 'feedback'; // Сброс класса
+      });
+      document.getElementById('result').innerHTML = ''; // Очистка результата
+      document.getElementById('resetButton').style.display = 'none'; // Скрыть кнопку перезапуска
+    }
+
+    // Функция для отображения результатов тестов
+    function displayTestResults() {
+      const resultsDiv = document.getElementById('testResults');
+      const results = localStorage.getItem('testResults');
+
+      if (results) {
+        resultsDiv.innerHTML = results; // Отображение результатов
+      } else {
+        resultsDiv.innerHTML = '<p>Тесты еще не пройдены.</p>';
+      }
+    }
+  </script>
+</body>
+
+</html>

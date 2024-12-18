@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <title>Словарь - Человек-паук</title>
+    <style>
+        /* Стили для словаря */
+        .term-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .term-list li {
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin: 5px 0;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .term-list li:hover {
+            background-color: #f0f0f0;
+        }
+
+        .description {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+        }
+
+        .search-box {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Человек-паук</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Описание</a></li>
+                <li><a href="glossary.html" class="active">Словарь</a></li>
+                <li><a href="gallery.html">Галерея</a></li>
+                <li><a href="quiz.html">Тест</a></li>
+                <li><a href="profile.html">Личный кабинет</a></li>
+                <li><span id="userGreeting"></span> <button id="logoutButton" onclick="logout()">Выйти</button></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Словарь</h2>
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Поиск термина..." onkeyup="filterTerms()">
+        </div>
+        <ul class="term-list" id="termList">
+            <li onclick="showDescription('паутина')">Паутина</li>
+            <li onclick="showDescription('Человек-паук')">Человек-паук</li>
+            <li onclick="showDescription('Питер Паркер')">Питер Паркер</li>
+            <li onclick="showDescription('Зелёный Гоблин')">Зелёный Гоблин</li>
+            <li onclick="showDescription('Доктор Октавиус')">Доктор Октавиус</li>
+            <li onclick="showDescription('Веном')">Веном</li>
+            <li onclick="showDescription('Мэри Джейн')">Мэри Джейн</li>
+            <li onclick="showDescription('Гарри Осборн')">Гарри Осборн</li>
+            <li onclick="showDescription('Супергерой')">Супергерой</li>
+            <li onclick="showDescription('Суперспособности')">Суперспособности</li>
+        </ul>
+        <div class="description" id="descriptionBox">
+            <p>Выберите термин для отображения его описания.</p>
+        </div>
+    </main>
+    <footer>
+         <p>Контактные данные: <a href="#">Телефон</a> <a href="#">ВК</a> <a href="#">Телеграм</a></p>
+        <p>Человек-паук © 2024</p>
+    </footer>
+    <script src="js/script.js"></script>
+    <script>
+        const descriptions = {
+            'паутина': 'Паутина — это особый материал, который Человек-паук использует для передвижения и ловли врагов.',
+            'Человек-паук': 'Человек-паук — это супергерой, созданный Стэном Ли и Стивом Дитко. Его настоящее имя — Питер Паркер.',
+            'Питер Паркер': 'Питер Паркер — это обычный подросток, который стал Человеком-пауком после укуса радиоактивного паука.',
+            'Зелёный Гоблин': 'Зелёный Гоблин — один из главных врагов Человека-паука, известный своим зл одейским планом и использованием технологий.',
+            'Доктор Октавиус': 'Доктор Октавиус — это ученый с механическими щупальцами, который стал одним из самых опасных противников Человека-паука.',
+            'Веном': 'Веном — это симбиот, который сливается с человеком, чтобы создать мощного врага Человека-паука.',
+            'Мэри Джейн': 'Мэри Джейн — это возлюбленная Питера Паркера, известная своей смелостью и поддержкой Человека-паука.',
+            'Гарри Осборн': 'Гарри Осборн — лучший друг Питера Паркера, который сталкивается с собственными проблемами и становится врагом.',
+            'Супергерой': 'Супергерой — это персонаж, обладающий сверхъестественными способностями и использующий их для защиты людей.',
+            'Суперспособности': 'Суперспособности — это уникальные навыки и силы, которые позволяют персонажам выполнять необычные действия.'
+        };
+
+        function showDescription(term) {
+            const descriptionBox = document.getElementById('descriptionBox');
+            descriptionBox.innerHTML = `<p><strong>${term}</strong>: ${descriptions[term]}</p>`;
+        }
+
+        function filterTerms() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const termList = document.getElementById('termList');
+            const terms = termList.getElementsByTagName('li');
+
+            for (let i = 0; i < terms.length; i++) {
+                const term = terms[i].textContent.toLowerCase();
+                terms[i].style.display = term.includes(input) ? '' : 'none';
+            }
+        }
+    </script>
+</body>
+</html>

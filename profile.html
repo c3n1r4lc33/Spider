@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/styles.css">
+  <title>Личный кабинет - Человек-паук</title>
+  <style>
+    /* Стили для личного кабинета */
+    .profile-container {
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .profile-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .profile-info {
+      margin-bottom: 20px;
+    }
+
+    .logout-button {
+      padding: 10px 15px;
+      background-color: #c0392b;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .logout-button:hover {
+      background-color: #a93226;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Человек-паук</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Описание</a></li>
+        <li><a href="glossary.html">Словарь</a></li>
+        <li><a href="gallery.html">Галерея</a></li>
+        <li><a href="quiz.html">Тест</a></li>
+        <li><a href="profile.html" class="active">Личный кабинет</a></li>
+        <li><span id="userGreeting"></span> <button id="logoutButton" onclick="logout()">Выйти</button></li>
+      </ul>
+    </nav>
+  </header>
+  <main style="background: none; box-shadow: none;">
+    <div class="profile-container">
+      <div class="profile-header">
+        <h2>Личный кабинет</h2>
+      </div>
+      <div class="profile-info">
+        <p><strong>Имя пользователя:</strong> <span id="username">Пользователь</span></p>
+        <p><strong>Пол пользователя:</strong> <span id="gender">-</span></p>
+
+        <p><strong>Результат последнего теста:</strong> <span id="lastScore">0 баллов</span></p>
+      </div>
+      <button class="logout-button" onclick="logout()">Выход</button>
+    </div>
+  </main>
+  <footer>
+    <p>Контактные данные: <a href="#">Телефон</a> <a href="#">ВК</a> <a href="#">Телеграм</a></p>
+    <p>Человек-паук © 2024</p>
+  </footer>
+  <script src="js/script.js"></script>
+  <script>
+    // Пример данных пользователя
+    const userData = {
+      username: localStorage.getItem('username'),
+      gender: localStorage.getItem('gender'),
+      lastScore: localStorage.getItem('score') || 0
+    };
+
+    // Функция для отображения данных пользователя
+    function displayUserData() {
+      document.getElementById('username').textContent = userData.username;
+      document.getElementById('gender').textContent = userData.gender;
+
+      document.getElementById('lastScore').textContent = userData.lastScore + " б.";
+
+    }
+
+    // Вызов функции для отображения данных при загрузке страницы
+    displayUserData();
+
+    // Функция выхода
+    function logout() {
+      localStorage.clear();
+      // Здесь можно добавить логику выхода, например, очистку данных сессии
+      alert("Вы вышли из системы.");
+      // Перенаправление на страницу входа или главную
+      window.location.href = "auth.html"; // Замените на вашу страницу входа
+    }
+
+   
+  </script>
+</body>
+
+</html>
