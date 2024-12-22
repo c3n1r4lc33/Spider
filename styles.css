@@ -1,0 +1,142 @@
+@import url(https://fonts.googleapis.com/css?family=Oswald:700);
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0; /* Светлый фон */
+  color: #333; /* Темный текст */
+}
+
+header {
+  background-color: #c0392b; /* Красный цвет, как у костюма Человека-паука */
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, .8)) , url(../images/header/header-bg.jpg) top / cover;
+
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+header h1 {
+  margin-top: 0;
+  font-family: "Oswald";
+}
+
+h2 {
+  margin-top: 0;
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+nav ul li a.active {
+  text-decoration: underline;
+}
+
+nav ul li a:hover {
+  text-decoration: underline;
+}
+
+main {
+  flex-grow: 1;
+  padding: 20px;
+  max-width: 800px;
+  width: 100%;
+  margin: 20px auto;
+  background-color: white; /* Белый фон для основного контента */
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  color: #c0392b; /* Красный цвет для заголовков */
+}
+
+label {
+  display: block;
+  /* margin: 10px 0 5px; */
+}
+
+input[type="text"],
+input[type="date"],
+select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  background-color: #c0392b; /* Красный цвет для кнопки */
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background .33s ease;
+}
+
+button:hover {
+  background-color: #a93226; /* Темнее при наведении */
+}
+
+.error {
+  color: red;
+  font-size: 0.9em;
+}
+
+h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #c0392b; /* Красный цвет для подвала */
+
+  color: white;
+  position: relative;
+  bottom: 0;
+}
+
+footer a {
+  color: #fff;
+}
+
+#logoutButton {
+  margin-left: 10px;
+}
+
+nav ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px 30px;
+}
+
+#userGreeting {
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 600;
+}
